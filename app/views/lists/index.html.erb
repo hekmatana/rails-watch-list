@@ -1,12 +1,15 @@
 <h1>My lists</h1>
 <div class="cards">
   <% @lists.each do |list|%>
-    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%=list.image_url%>')">
-      <%= link_to list.name, list_path(list) %>
-    </div>
-  <%end%>
+  <%= link_to list_path(list), class: "text-decoration-none" do %>
+    <div class="card-category" style="background-image: url('<%=list.image_url%>')">
+      <%=list.name %>
+      </div>
+<% end %>
+<% end %>
 </div>
-<br>
-<br>
 
 <%= render "form", list: @list %>
+
+
+<%# , class: "text-decoration-none %>
