@@ -1,0 +1,21 @@
+<h1><%=@list.name%></h1>
+<br>
+<br>
+
+<%= render "bookmarks/form", bookmark: @bookmark, list: @list %>
+
+<br>
+<br>
+<p><strong>Reviews</strong></p>
+
+<% @list.bookmarks.each do |bookmark|%>
+<div class="d-flex flex-grow-1">
+  <div class="flex-grow-1 p-2"><p class="text-decoration-none text-muted">-<%=bookmark.comment%></div>
+  <div class="p-2">
+    <%= Movie.find(bookmark.movie_id).title%>
+    <%= link_to "delete", bookmark_path(bookmark),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+    </div>
+</div>
+<% end %>
+<br>

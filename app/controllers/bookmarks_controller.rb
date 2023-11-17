@@ -1,8 +1,37 @@
 class BookmarksController < ApplicationController
+  def new
+    @bookmark = Bookmark.new
+  end
+
   def create
+    @list = List.find(params[:list_id])
+    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark.list = @list
+    if @bookmark.save
+      redirect_to list_path(@list)
+    else
+      # @list = List.find(params[:id])
+      render "lists/show", status: :unprocessable_entity
+    end
   end
+
   def destroy
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.destroy
+    redirect_to list_path(@bookmark.list), status: :see_other
   end
-  # As a user, I can bookmark a movie inside a movie list
-  # As a user, I can destroy a bookmark
+
+  private
+  def bookmark_params
+    params.require(:bookmark).permit(:movie_id, :comment)
+  end
 end
+
+
+
+# Bookmark.create(
+#   comment: bookmark_params(:movie_id)
+#   list_id:
+#   list_id: params[:list_id]
+# )
+# end
