@@ -2,7 +2,8 @@
 <div class="cards">
   <% @lists.each do |list|%>
   <%= link_to list_path(list), class: "text-decoration-none" do %>
-    <div class="card-category" style="background-image: url('<%=list.image_url%>')">
+    <div class="card-category"
+  style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%=list.photo.attached? ? (cl_image_path list.photo.key) : "https://img.freepik.com/photos-premium/fond-ciel-etoile-multicolore-ai-generative_438099-18690.jpg" %>')">
       <%=list.name %>
       </div>
 <% end %>
@@ -10,6 +11,3 @@
 </div>
 
 <%= render "form", list: @list %>
-
-
-<%# , class: "text-decoration-none %>
