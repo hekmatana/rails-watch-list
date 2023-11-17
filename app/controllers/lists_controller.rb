@@ -27,7 +27,7 @@ end
 private
 
 def list_params
-  params.require(:list).permit(:name)
+  params.require(:list).permit(:name, :image_url)
 end
 
   # As a user, I can see all my movie lists
